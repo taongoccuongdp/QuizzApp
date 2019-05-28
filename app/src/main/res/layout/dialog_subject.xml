@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="350dp" android:layout_height="wrap_content"
+    android:layout_gravity="center">
+    <LinearLayout
+        android:layout_marginTop="50dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/materialGreen"
+        android:orientation="vertical"
+        android:gravity="center_horizontal">
+        <TextView
+            android:id="@+id/dialog_subject_name"
+            android:layout_marginTop="90dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tên môn học"
+            android:textColor="@android:color/white"
+            android:textStyle="bold"
+            android:textSize="24sp"/>
+        <TextView
+            android:id="@+id/dialog_subject_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:text="ID Môn học"
+            android:textColor="@android:color/white"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="10dp"/>
+            <Button
+                android:id="@+id/btn_play"
+                android:drawablePadding="20dp"
+                android:textAlignment="textStart"
+                android:padding="20dp"
+                android:drawableLeft="@drawable/ic_local_library_black_24dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_list_subject_item"
+                android:text="Ôn tập"/>
+            <Button
+                android:id="@+id/btn_test"
+                android:drawablePadding="20dp"
+                android:textAlignment="textStart"
+                android:padding="20dp"
+                android:drawableLeft="@drawable/ic_school_black_24dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_list_subject_item"
+                android:text="Trắc nghiệm"/>
+            <Button
+                android:id="@+id/btn_schedual"
+                android:drawablePadding="20dp"
+                android:textAlignment="textStart"
+                android:padding="20dp"
+                android:drawableLeft="@drawable/ic_schedule_black_24dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_list_subject_item"
+                android:text="Đặt lịch"/>
+        </LinearLayout>
+    <ImageView
+        android:id="@+id/img_subject_icon"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:src="@drawable/ic_profile"
+        android:padding="10dp"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentTop="true"/>
+</RelativeLayout>

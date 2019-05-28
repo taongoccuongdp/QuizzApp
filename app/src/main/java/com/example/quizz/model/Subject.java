@@ -5,10 +5,10 @@ public class Subject {
     private String name;
     private String icon;
 
-    public Subject(String id, String name, String detail) {
+    public Subject(String id, String name, String icon) {
         this.id = id;
         this.name = name;
-        this.icon = "";
+        this.icon = icon;
     }
     public Subject(){
 

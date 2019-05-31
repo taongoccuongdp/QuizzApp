@@ -21,10 +21,7 @@ import java.util.StringTokenizer;
 public class HomeRecyclerViewAdapter extends RecyclerView.Adapter<HomeRecyclerViewAdapter.HomeViewHolder> {
     Context mContext;
     List<Subject> mData;
-    //Dialog init
     Dialog mDialog;
-    //TextView dialogSubjetName = (TextView)mDialog.findViewById(R.id.dialog_subject_name);
-    //TextView dialogSubjetId = (TextView)mDialog.findViewById(R.id.dialog_subject_id);
     public HomeRecyclerViewAdapter(Context mContext, List<Subject> mData){
         this.mContext = mContext;
         this.mData = mData;
@@ -33,14 +30,21 @@ public class HomeRecyclerViewAdapter extends RecyclerView.Adapter<HomeRecyclerVi
     @Override
     public HomeViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View v = LayoutInflater.from(mContext).inflate(R.layout.home_item, viewGroup, false);
-        HomeViewHolder viewHolder = new HomeViewHolder(v);
-        //dialog click even listener
+        final HomeViewHolder viewHolder = new HomeViewHolder(v);
+        //dialog init
         mDialog = new Dialog(mContext);
         mDialog.setContentView(R.layout.dialog_subject);
         viewHolder.home_item.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                //dialog click even listener
+                TextView dialogSubjetName = (TextView)mDialog.findViewById(R.id.dialog_subject_name);
+                TextView dialogSubjetId = (TextView)mDialog.findViewById(R.id.dialog_subject_id);
+                ImageView dialogSubjectIcon = (ImageView)mDialog.findViewById(R.id.img_subject_icon);
+                dialogSubjetName.setText(mData.get(viewHolder.getAdapterPosition()).getName());
+                dialogSubjetId.setText(mData.get(viewHolder.getAdapterPosition()).getId().toUpperCase());
+                Glide.with(mContext).load(mData.get(viewHolder.getAdapterPosition()).getIcon()).into(dialogSubjectIcon);
+                mDialog.show();
             }
         });
         return viewHolder;

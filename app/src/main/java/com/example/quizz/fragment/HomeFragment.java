@@ -1,19 +1,15 @@
 package com.example.quizz.fragment;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.quizz.HomeRecyclerViewAdapter;
+import com.example.quizz.adapter.HomeRecyclerViewAdapter;
 import com.example.quizz.R;
 import com.example.quizz.model.Subject;
 import com.google.firebase.database.DataSnapshot;

@@ -97,4 +97,5 @@ public class Questions {
     public void setRightAnswer(String rightAnswer) {
         this.rightAnswer = rightAnswer;
     }
+
 }

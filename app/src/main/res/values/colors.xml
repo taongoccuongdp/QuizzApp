@@ -20,4 +20,18 @@
     <color name="grayLight">#fafafa</color>
     <color name="startBlue">#09c6df</color>
     <color name="endBlue">#0bcce6</color>
+    <color name="timelinePrimary">#c2185b</color>
+    <color name="timelinePrimaryDark">#8c0032</color>
+    <color name="timelineAccent">#fa5788</color>
+    <color name="timelineGrey">#efefef</color>
+    <color name="timelineDarkGrey">#d5d5d5</color>
+    <color name="timelineNormalText">#585858</color>
+    <color name="timelineTransparentBlack">#bc500d3b</color>
+    <color name="timelineLightBlack">#252525</color>
+    <color name="timelineDarkBlue">#514688</color>
+    <color name="timelineMoreGreen">#47D476</color>
+    <color name="timelineGreen">#77d981</color>
+    <color name="timelineLightBlue">#5f5881</color>
+    <color name="timelineYellow">#FFC107</color>
+    <color name="timelineUserImgOverlay">#FFFFFFFF</color>
 </resources>

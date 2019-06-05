@@ -22,7 +22,6 @@ import com.google.firebase.database.DatabaseReference;
 import org.w3c.dom.Text;
 
 import java.util.List;
-import java.util.Locale;
 
 public class Search_Adapter extends RecyclerView.Adapter<Search_Adapter.SearchViewHolder> {
     private Context mContext;

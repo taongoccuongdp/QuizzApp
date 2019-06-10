@@ -6,7 +6,7 @@
         android:layout_marginTop="50dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/materialGreen"
+        android:background="@color/endBlue"
         android:orientation="vertical"
         android:gravity="center_horizontal">
         <TextView
@@ -17,12 +17,12 @@
             android:text="Tên môn học"
             android:textColor="@android:color/white"
             android:textStyle="bold"
-            android:textSize="24sp"/>
+            android:textSize="18sp"/>
         <TextView
             android:id="@+id/dialog_subject_id"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="18sp"
+            android:textSize="13sp"
             android:text="ID Môn học"
             android:textColor="@android:color/white"
             android:layout_marginTop="5dp"
@@ -60,8 +60,8 @@
         </LinearLayout>
     <ImageView
         android:id="@+id/img_subject_icon"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:src="@drawable/ic_profile"
         android:padding="10dp"
         android:layout_centerHorizontal="true"

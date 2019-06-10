@@ -10,11 +10,11 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="22sp"
+        android:textSize="18sp"
         android:gravity="center"
         android:layout_marginTop="30dp"
         android:textColor="#4a4a4a"
-        android:text="Danh sách môn học" />
+        android:text="Danh sách môn" />
     <android.support.v7.widget.RecyclerView
         android:id="@+id/home_recyclerview"
         android:layout_width="match_parent"

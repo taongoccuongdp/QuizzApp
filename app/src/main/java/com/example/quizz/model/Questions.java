@@ -1,8 +1,11 @@
 package com.example.quizz.model;
 
-public class Questions {
+import java.io.Serializable;
+
+public class Questions implements Serializable {
+    public static final long serialVersionUID = 1L;
     private int id;
-    private int subjectId;
+    private String subjectId;
     private String question;
     private String option1;
     private String option2;
@@ -13,7 +16,7 @@ public class Questions {
     public Questions() {
     }
 
-    public Questions(int id, int subjectId, String question, String option1, String option2, String option3, String option4, String rightOpt) {
+    public Questions(int id, String subjectId, String question, String option1, String option2, String option3, String option4, String rightOpt) {
         this.id = id;
         this.subjectId = subjectId;
         this.question = question;
@@ -32,11 +35,11 @@ public class Questions {
         this.id = id;
     }
 
-    public int getSubjectId() {
+    public String getSubjectId() {
         return subjectId;
     }
 
-    public void setSubjectId(int subjectId) {
+    public void setSubjectId(String subjectId) {
         this.subjectId = subjectId;
     }
 

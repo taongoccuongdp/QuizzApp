@@ -12,7 +12,7 @@
         android:layout_centerHorizontal="true"
         android:layout_width="120dp"
         android:layout_height="120dp"
-        android:src="@drawable/Kiana"/>
+        android:src="@drawable/kiana"/>
     <LinearLayout
         android:layout_marginLeft="10dp"
         android:id="@+id/ll_end_info"

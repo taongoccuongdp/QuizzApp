@@ -2,17 +2,21 @@ package com.example.quizz.adapter;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.example.quizz.PlayActivity;
 import com.example.quizz.R;
+import com.example.quizz.model.QuizzSession;
 import com.example.quizz.model.Subject;
 
 import java.util.List;
@@ -27,7 +31,7 @@ public class HomeRecyclerViewAdapter extends RecyclerView.Adapter<HomeRecyclerVi
     }
     @NonNull
     @Override
-    public HomeViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+    public HomeViewHolder onCreateViewHolder(@NonNull final ViewGroup viewGroup, int i) {
         View v = LayoutInflater.from(mContext).inflate(R.layout.home_item, viewGroup, false);
         final HomeViewHolder viewHolder = new HomeViewHolder(v);
         //dialog init
@@ -39,11 +43,26 @@ public class HomeRecyclerViewAdapter extends RecyclerView.Adapter<HomeRecyclerVi
                 //dialog click even listener
                 TextView dialogSubjetName = (TextView)mDialog.findViewById(R.id.dialog_subject_name);
                 TextView dialogSubjetId = (TextView)mDialog.findViewById(R.id.dialog_subject_id);
+                Button btnPlayQuizz = (Button)mDialog.findViewById(R.id.btn_play);
                 ImageView dialogSubjectIcon = (ImageView)mDialog.findViewById(R.id.img_subject_icon);
                 dialogSubjetName.setText(mData.get(viewHolder.getAdapterPosition()).getName());
                 dialogSubjetId.setText(mData.get(viewHolder.getAdapterPosition()).getId().toUpperCase());
                 Glide.with(mContext).load(mData.get(viewHolder.getAdapterPosition()).getIcon()).into(dialogSubjectIcon);
                 mDialog.show();
+                btnPlayQuizz.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        QuizzSession.resetSesstion();
+                        Intent intent = new Intent(mContext, PlayActivity.class);
+                        QuizzSession.SUBJECT_ID = mData.get(viewHolder.getAdapterPosition()).getId();
+                        QuizzSession.QUIZZ_TIME = QuizzSession.DONT_SET_TIME;
+                        QuizzSession.SUBJECT_NAME = mData.get(viewHolder.getAdapterPosition()).getName();
+                        QuizzSession.NUM_OF_QUESTIONS = QuizzSession.ALL_QUESTIONS;
+                        QuizzSession.QUIZZ_CATEGORY = QuizzSession.QUIZZ;
+                        mContext.startActivity(intent);
+                    }
+                });
+
             }
         });
         return viewHolder;

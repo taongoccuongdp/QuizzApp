@@ -1,37 +1,27 @@
 package com.example.quizz.model;
 
 public class Questions {
-    int id;
-    int monhocId;
-    String question;
-    String answerA;
-    String answerB;
-    String answerC;
-    String answerD;
-    String rightAnswer;
-
-    public Questions(int monhocId, String question, String answerA, String answerB, String answerC, String answerD, String rightAnswer) {
-        this.monhocId = monhocId;
-        this.question = question;
-        this.answerA = answerA;
-        this.answerB = answerB;
-        this.answerC = answerC;
-        this.answerD = answerD;
-        this.rightAnswer = rightAnswer;
-    }
-
-    public Questions(int id, int monhocId, String question, String answerA, String answerB, String answerC, String answerD, String rightAnswer) {
-        this.id = id;
-        this.monhocId = monhocId;
-        this.question = question;
-        this.answerA = answerA;
-        this.answerB = answerB;
-        this.answerC = answerC;
-        this.answerD = answerD;
-        this.rightAnswer = rightAnswer;
-    }
+    private int id;
+    private int subjectId;
+    private String question;
+    private String option1;
+    private String option2;
+    private String option3;
+    private String option4;
+    private String rightOpt;
 
     public Questions() {
+    }
+
+    public Questions(int id, int subjectId, String question, String option1, String option2, String option3, String option4, String rightOpt) {
+        this.id = id;
+        this.subjectId = subjectId;
+        this.question = question;
+        this.option1 = option1;
+        this.option2 = option2;
+        this.option3 = option3;
+        this.option4 = option4;
+        this.rightOpt = rightOpt;
     }
 
     public int getId() {
@@ -42,12 +32,12 @@ public class Questions {
         this.id = id;
     }
 
-    public int getMonhocId() {
-        return monhocId;
+    public int getSubjectId() {
+        return subjectId;
     }
 
-    public void setMonhocId(int monhocId) {
-        this.monhocId = monhocId;
+    public void setSubjectId(int subjectId) {
+        this.subjectId = subjectId;
     }
 
     public String getQuestion() {
@@ -58,44 +48,43 @@ public class Questions {
         this.question = question;
     }
 
-    public String getAnswerA() {
-        return answerA;
+    public String getOption1() {
+        return option1;
     }
 
-    public void setAnswerA(String answerA) {
-        this.answerA = answerA;
+    public void setOption1(String option1) {
+        this.option1 = option1;
     }
 
-    public String getAnswerB() {
-        return answerB;
+    public String getOption2() {
+        return option2;
     }
 
-    public void setAnswerB(String answerB) {
-        this.answerB = answerB;
+    public void setOption2(String option2) {
+        this.option2 = option2;
     }
 
-    public String getAnswerC() {
-        return answerC;
+    public String getOption3() {
+        return option3;
     }
 
-    public void setAnswerC(String answerC) {
-        this.answerC = answerC;
+    public void setOption3(String option3) {
+        this.option3 = option3;
     }
 
-    public String getAnswerD() {
-        return answerD;
+    public String getOption4() {
+        return option4;
     }
 
-    public void setAnswerD(String answerD) {
-        this.answerD = answerD;
+    public void setOption4(String option4) {
+        this.option4 = option4;
     }
 
-    public String getRightAnswer() {
-        return rightAnswer;
+    public String getRightOpt() {
+        return rightOpt;
     }
 
-    public void setRightAnswer(String rightAnswer) {
-        this.rightAnswer = rightAnswer;
+    public void setRightOpt(String rightOpt) {
+        this.rightOpt = rightOpt;
     }
-
 }

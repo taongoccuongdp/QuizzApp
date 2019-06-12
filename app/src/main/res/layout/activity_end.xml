@@ -21,6 +21,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
         <TextView
+            android:id="@+id/txt_subject_name"
             android:textSize="20sp"
             android:textStyle="bold"
             android:textColor="@color/cardBackgroundColor"
@@ -28,6 +29,7 @@
             android:layout_height="wrap_content"
             android:text="Môn học: Không biết"/>
         <TextView
+            android:id="@+id/txt_subject_id"
             android:layout_marginTop="10dp"
             android:textSize="16sp"
             android:textColor="@color/cardBackgroundColor"
@@ -35,6 +37,7 @@
             android:layout_height="wrap_content"
             android:text="Mã môn học: int001"/>
         <TextView
+            android:id="@+id/txt_num_right_answers"
             android:layout_marginTop="5dp"
             android:textSize="16sp"
             android:textColor="@color/cardBackgroundColor"
@@ -43,6 +46,7 @@
             android:text="Số câu trả lời đúng: 0 / 0"
             />
         <TextView
+            android:id="@+id/txt_time_quizz"
             android:layout_marginTop="5dp"
             android:textSize="16sp"
             android:textColor="@color/cardBackgroundColor"

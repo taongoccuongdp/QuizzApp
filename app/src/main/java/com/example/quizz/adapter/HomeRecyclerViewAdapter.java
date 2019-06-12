@@ -44,6 +44,7 @@ public class HomeRecyclerViewAdapter extends RecyclerView.Adapter<HomeRecyclerVi
                 TextView dialogSubjetName = (TextView)mDialog.findViewById(R.id.dialog_subject_name);
                 TextView dialogSubjetId = (TextView)mDialog.findViewById(R.id.dialog_subject_id);
                 Button btnPlayQuizz = (Button)mDialog.findViewById(R.id.btn_play);
+                Button btnPlayTest = (Button)mDialog.findViewById(R.id.btn_test);
                 ImageView dialogSubjectIcon = (ImageView)mDialog.findViewById(R.id.img_subject_icon);
                 dialogSubjetName.setText(mData.get(viewHolder.getAdapterPosition()).getName());
                 dialogSubjetId.setText(mData.get(viewHolder.getAdapterPosition()).getId().toUpperCase());
@@ -59,6 +60,19 @@ public class HomeRecyclerViewAdapter extends RecyclerView.Adapter<HomeRecyclerVi
                         QuizzSession.SUBJECT_NAME = mData.get(viewHolder.getAdapterPosition()).getName();
                         QuizzSession.NUM_OF_QUESTIONS = QuizzSession.ALL_QUESTIONS;
                         QuizzSession.QUIZZ_CATEGORY = QuizzSession.QUIZZ;
+                        mContext.startActivity(intent);
+                    }
+                });
+                btnPlayTest.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        QuizzSession.resetSesstion();
+                        Intent intent = new Intent(mContext, PlayActivity.class);
+                        QuizzSession.SUBJECT_ID = mData.get(viewHolder.getAdapterPosition()).getId();
+                        QuizzSession.QUIZZ_TIME = QuizzSession.TEST_TIME;
+                        QuizzSession.SUBJECT_NAME = mData.get(viewHolder.getAdapterPosition()).getName();
+                        QuizzSession.NUM_OF_QUESTIONS = QuizzSession.NUM_QUESTIONS_FOR_TEST;
+                        QuizzSession.QUIZZ_CATEGORY = QuizzSession.TEST;
                         mContext.startActivity(intent);
                     }
                 });

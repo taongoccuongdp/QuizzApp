@@ -113,15 +113,21 @@
             android:layout_height="wrap_content"
             android:text="Đây là option 4"/>
     </LinearLayout>
-    <ProgressBar
+
+    <me.itangqi.waveloadingview.WaveLoadingView
         android:id="@+id/pb_timeCountDown"
-        android:layout_centerInParent="true"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         android:layout_marginBottom="60dp"
         android:layout_alignParentBottom="true"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:indeterminate="true"
-        android:indeterminateTintMode="src_atop"
-        android:indeterminateTint="@android:color/white"
-        />
+        android:layout_centerHorizontal="true"
+        app:wlv_borderColor="@android:color/white"
+        app:wlv_borderWidth="3dp"
+        app:wlv_round_rectangle="true"
+        app:wlv_shapeType="circle"
+        app:wlv_titleCenterColor="@android:color/white"
+        app:wlv_titleCenterSize="20sp"
+        app:wlv_triangle_direction="north"
+        app:wlv_waveAmplitude="70"
+        app:wlv_waveColor="@color/startBlue" />
 </RelativeLayout>

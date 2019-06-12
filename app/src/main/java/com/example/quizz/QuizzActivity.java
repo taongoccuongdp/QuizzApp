@@ -187,8 +187,13 @@ public class QuizzActivity extends AppCompatActivity {
         countDownTimer = new CountDownTimer(timeToLeft * 1000, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
+                int timeRemaining = QuizzSession.QUIZZ_TIME - timeToQuizz;
+                if(timeRemaining/60 >= 1){
+                    timeCountdown.setCenterTitle(String.format("%d phút", timeRemaining/60));
+                }else{
+                    timeCountdown.setCenterTitle(String.format("%d giây",  timeRemaining));
+                }
                 timeCountdown.setProgressValue(timeToQuizz*100/QuizzSession.QUIZZ_TIME);
-                timeCountdown.setCenterTitle(String.valueOf(QuizzSession.QUIZZ_TIME - timeToQuizz));
                 timeToQuizz++;
                 //Log.d("timer", String.valueOf(timeToQuizz));
             }

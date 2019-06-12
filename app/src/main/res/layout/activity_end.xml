@@ -54,6 +54,7 @@
             android:layout_height="wrap_content"
             android:text="Thời gian làm bài: 0s"/>
         <Button
+            android:id="@+id/btn_endgame"
             android:layout_gravity="center"
             android:layout_marginTop="30dp"
             android:padding="15dp"

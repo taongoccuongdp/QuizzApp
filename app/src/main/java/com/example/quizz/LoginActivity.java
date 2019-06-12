@@ -1,7 +1,9 @@
 package com.example.quizz;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -10,8 +12,10 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -28,6 +32,9 @@ public class LoginActivity extends AppCompatActivity {
     private FirebaseAuth auth;
     private Button login;
     private TextView signup;
+    private RadioButton remememberMe;
+    private SharedPreferences sharedPreferences;
+    private SharedPreferences.Editor editor;
     ProgressDialog pd;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +48,10 @@ public class LoginActivity extends AppCompatActivity {
         edtpassword = (EditText)findViewById(R.id.txtLogin_Password);
         login = (Button)findViewById(R.id.btnLogin_Login);
         signup = (TextView)findViewById(R.id.txtLogin_Register);
+        remememberMe = (RadioButton)findViewById(R.id.rbutton_remember);
+        sharedPreferences = getSharedPreferences("com.example.quizz", Context.MODE_PRIVATE);
+        editor = sharedPreferences.edit();
+        checkRemember();
         //Get firebase auth instance
         auth = FirebaseAuth.getInstance();
         signup.setOnClickListener(new View.OnClickListener() {
@@ -53,6 +64,7 @@ public class LoginActivity extends AppCompatActivity {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                rMB();
                 pd = new ProgressDialog(LoginActivity.this);
                 pd.setMessage("Đang đăng nhập ...");
                 pd.show();
@@ -101,5 +113,28 @@ public class LoginActivity extends AppCompatActivity {
                 });
             }
         });
+    }
+    private void checkRemember(){
+        if (sharedPreferences.getBoolean("remember", true)){
+            edtemail.setText(sharedPreferences.getString("email", ""));
+            edtpassword.setText(sharedPreferences.getString("password", ""));
+            remememberMe.setChecked(true);
+        }else{
+            remememberMe.setChecked(false);
+        }
+    }
+    private void rMB(){
+
+        if(remememberMe.isChecked()){
+            editor.putString("email", edtemail.getText().toString());
+            editor.putString("password", edtpassword.getText().toString());
+            editor.putBoolean("remember", true);
+            editor.apply();
+        }else{
+            editor.putString("email", "");
+            editor.putString("password", "");
+            editor.putBoolean("remember", false);
+            editor.apply();
+        }
     }
 }

@@ -99,14 +99,12 @@ public class HomeRecyclerViewAdapter extends RecyclerView.Adapter<HomeRecyclerVi
         private ImageView subjectIcon;
         private TextView subjectName;
         private TextView subjectId;
-        private ImageView subjectMenu;
         public HomeViewHolder(View itemView){
             super(itemView);
             home_item = (LinearLayout)itemView.findViewById(R.id.home_item_id);
             subjectIcon = (ImageView)itemView.findViewById(R.id.img_subject);
             subjectName = (TextView)itemView.findViewById(R.id.txt_subject_name);
             subjectId = (TextView) itemView.findViewById(R.id.txt_subject_id);
-            subjectMenu = (ImageView)itemView.findViewById(R.id.img_subject_menu);
         }
     }
 }

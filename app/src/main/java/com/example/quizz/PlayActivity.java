@@ -22,6 +22,7 @@ import org.w3c.dom.Text;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class PlayActivity extends AppCompatActivity {
@@ -50,16 +51,16 @@ public class PlayActivity extends AppCompatActivity {
     }
     private void setUpQuizz(){
         //set info
-        QuizzSession.LSTQUESTIONS.addAll(lstQuestion);
+        //QuizzSession.LSTQUESTIONS.addAll(lstQuestion);
         subjectName.setText(new StringBuilder().append("Tên môn học: ").append(QuizzSession.SUBJECT_NAME).toString());
         subjectId.setText(new StringBuilder().append("Mã môn học: ").append(QuizzSession.SUBJECT_ID.toUpperCase()).toString());
         timeToQuizz.setText(new StringBuilder().append("Thời gian làm bài: ")
                 .append((int)QuizzSession.QUIZZ_TIME/60).append(" phút ")
-                .append(QuizzSession.QUIZZ_TIME - (int)QuizzSession.QUIZZ_TIME/60)
-                .append(" s").toString());
+                .append(QuizzSession.QUIZZ_TIME%60)
+                .append(" giây").toString());
         //Log.d("Question1:", lstQuestion.get(1).getSubjectId());
-        numOfQuestions.setText(String.format("Số lượng câu hỏi: %d", lstQuestion.size()));
-        if(QuizzSession.QUIZZ_TIME == 0){
+        numOfQuestions.setText(String.format("Số lượng câu hỏi: %d", QuizzSession.NUM_OF_QUESTIONS));
+        if(QuizzSession.QUIZZ_TIME == QuizzSession.DONT_SET_TIME){
             timeToQuizz.setText(new StringBuilder().append("Thời gian làm bài: ")
                     .append(" VÔ HẠN").toString());
         }
@@ -67,6 +68,13 @@ public class PlayActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(PlayActivity.this, QuizzActivity.class);
+                if(QuizzSession.QUIZZ_CATEGORY.equals(QuizzSession.QUIZZ)){
+                    Collections.shuffle(lstQuestion);
+                }else if(QuizzSession.QUIZZ_CATEGORY.equals(QuizzSession.TEST)){
+                    List<Questions> newLstQuestion = ExtendFunc.setupTestcase(lstQuestion);
+                    lstQuestion.clear();
+                    lstQuestion.addAll(newLstQuestion);
+                }
                 intent.putExtra("questions", (Serializable) lstQuestion);
                 startActivity(intent);
             }

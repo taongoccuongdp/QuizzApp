@@ -178,12 +178,12 @@ public class QuizzActivity extends AppCompatActivity {
     }
 
     private void timerStart(int timeToLeft) {
-        //if (QuizzSession.QUIZZ_CATEGORY.equals(QuizzSession.TEST)) {
+        if (QuizzSession.QUIZZ_CATEGORY.equals(QuizzSession.TEST)) {
             timeCountdown.setVisibility(View.VISIBLE);
             timeCountdown.setProgressValue(0);
-        //} else if (QuizzSession.QUIZZ_CATEGORY.equals(QuizzSession.QUIZZ)) {
-            //timeCountdown.setVisibility(View.INVISIBLE);
-        //}
+        } else if (QuizzSession.QUIZZ_CATEGORY.equals(QuizzSession.QUIZZ)) {
+            timeCountdown.setVisibility(View.INVISIBLE);
+        }
         countDownTimer = new CountDownTimer(timeToLeft * 1000, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {

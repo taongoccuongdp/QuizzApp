@@ -11,6 +11,8 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.TextView;
@@ -32,7 +34,7 @@ public class LoginActivity extends AppCompatActivity {
     private FirebaseAuth auth;
     private Button login;
     private TextView signup;
-    private RadioButton remememberMe;
+    private ToggleButton remememberMe;
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
     ProgressDialog pd;
@@ -48,12 +50,22 @@ public class LoginActivity extends AppCompatActivity {
         edtpassword = (EditText)findViewById(R.id.txtLogin_Password);
         login = (Button)findViewById(R.id.btnLogin_Login);
         signup = (TextView)findViewById(R.id.txtLogin_Register);
-        remememberMe = (RadioButton)findViewById(R.id.rbutton_remember);
+        remememberMe = (ToggleButton) findViewById(R.id.rbutton_remember);
         sharedPreferences = getSharedPreferences("com.example.quizz", Context.MODE_PRIVATE);
         editor = sharedPreferences.edit();
         checkRemember();
         //Get firebase auth instance
         auth = FirebaseAuth.getInstance();
+        remememberMe.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(remememberMe.getText().equals(remememberMe.getTextOn())){
+                    remememberMe.setText(remememberMe.getTextOff());
+                }else{
+                    remememberMe.setText(remememberMe.getTextOn());
+                }
+            }
+        });
         signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -118,14 +130,14 @@ public class LoginActivity extends AppCompatActivity {
         if (sharedPreferences.getBoolean("remember", true)){
             edtemail.setText(sharedPreferences.getString("email", ""));
             edtpassword.setText(sharedPreferences.getString("password", ""));
-            remememberMe.setChecked(true);
+            remememberMe.setText(remememberMe.getTextOn());
         }else{
-            remememberMe.setChecked(false);
+            remememberMe.setText(remememberMe.getTextOff());
         }
     }
     private void rMB(){
 
-        if(remememberMe.isChecked()){
+        if(remememberMe.getText().equals(remememberMe.getTextOn())){
             editor.putString("email", edtemail.getText().toString());
             editor.putString("password", edtpassword.getText().toString());
             editor.putBoolean("remember", true);

@@ -53,15 +53,18 @@
         android:textColor="@android:color/white"
         android:inputType="textPassword"
         />
-    <RadioButton
+    <ToggleButton
+        android:background="@android:color/transparent"
         android:id="@+id/rbutton_remember"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="30dp"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="60dp"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="145dp"
+        android:layout_marginBottom="132dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Nhớ mật khẩu"
+        android:textOn="Quên tài khoản này"
+        android:textOff="Nhớ tài khoản này"
+        android:textSize="12sp"
         android:textColor="@android:color/white"/>
     <Button
         android:id="@+id/btnLogin_Login"

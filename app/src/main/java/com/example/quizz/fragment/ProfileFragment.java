@@ -9,10 +9,12 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.example.quizz.LoginActivity;
 import com.example.quizz.R;
 import com.example.quizz.Uploadphoto;
 import com.example.quizz.model.User;
@@ -25,12 +27,11 @@ import com.google.firebase.database.ValueEventListener;
 
 public class ProfileFragment extends Fragment {
     ImageView userAvatar;
-    TextView userScore;
-    TextView numLearnedSubjects;
     TextView phoneNumber;
     TextView studentId;
     TextView name;
     TextView email;
+    Button signout;
     private String userUid;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -39,18 +40,24 @@ public class ProfileFragment extends Fragment {
         userUid = FirebaseAuth.getInstance().getCurrentUser().getUid();
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
         userAvatar = (ImageView)view.findViewById(R.id.img_userAvatar);
-        userScore = (TextView)view.findViewById(R.id.txtScore);
-        numLearnedSubjects = (TextView)view.findViewById(R.id.txt_LearnedSubjects);
         phoneNumber = (TextView)view.findViewById(R.id.txt_phoneNumber);
         studentId = (TextView)view.findViewById(R.id.txt_studentId);
         name = (TextView)view.findViewById(R.id.txt_username);
         email = (TextView)view.findViewById(R.id.txt_email);
+        signout = (Button)view.findViewById(R.id.btn_signout);
         getUserProfile();
         userAvatar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getContext(), Uploadphoto.class);
                 startActivity(intent);
+            }
+        });
+        signout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent signoutIntent = new Intent(getContext(), LoginActivity.class);
+                startActivity(signoutIntent);
             }
         });
         return view;

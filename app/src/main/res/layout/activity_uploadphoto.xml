@@ -20,15 +20,7 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:textColor="@color/profileAccent"
-        android:textSize="20sp"
+        android:textSize="16sp"
         android:textStyle="bold"
-        android:text="Đang tải lên...."/>
-    <Button
-        android:id="@+id/btn_upload"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="test upload photo"
-        android:layout_centerHorizontal="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="30dp"/>
+        android:text="Đang tải lên.... Chờ chút"/>
 </RelativeLayout>

@@ -9,7 +9,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAlignment="center"
-            android:textSize="32sp"
+            android:textSize="20sp"
             android:paddingTop="15dp"
             android:paddingBottom="15dp"
             android:layout_marginRight="2dp"
@@ -18,12 +18,12 @@
             android:textColor="@color/colorPrimary1"
             android:text="Sửa"/>
     <TextView
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="6dp"
         android:id="@+id/txt_Bottom_Menu_Delete"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAlignment="center"
-        android:textSize="32sp"
+        android:textSize="20sp"
         android:paddingTop="15dp"
         android:paddingBottom="15dp"
         android:layout_marginRight="2dp"

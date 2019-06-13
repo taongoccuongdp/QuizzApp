@@ -30,7 +30,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Uploadphoto extends AppCompatActivity {
-    Button uploadBtn;
     TextView txtUpload;
     ImageView imgUpload;
     StorageReference storageReference;
@@ -43,18 +42,12 @@ public class Uploadphoto extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_uploadphoto);
         myUrl = "";
-        uploadBtn = (Button)findViewById(R.id.btn_upload);
         txtUpload = (TextView)findViewById(R.id.txt_upload_loading);
         imgUpload = (ImageView)findViewById(R.id.img_upload_icon);
         txtUpload.setVisibility(View.INVISIBLE);
         imgUpload.setVisibility(View.INVISIBLE);
         storageReference = FirebaseStorage.getInstance().getReference("users");
-        uploadBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getPhoto();
-            }
-        });
+        getPhoto();
     }
     private void getPhoto(){
         Intent galleryIntent = new Intent(Intent.ACTION_GET_CONTENT);

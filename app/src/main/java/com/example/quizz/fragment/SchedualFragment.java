@@ -1,6 +1,7 @@
 package com.example.quizz.fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -11,7 +12,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
+import com.example.quizz.DateTimePicker;
 import com.example.quizz.R;
 import com.example.quizz.adapter.SchedualAdapter;
 import com.example.quizz.model.Schedual;
@@ -23,6 +26,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,12 +37,14 @@ public class SchedualFragment extends Fragment {
     private List<Schedual> lstSchedual = new ArrayList<>();
     private RecyclerView schedualRecyclerView;
     DatabaseReference ref;
+    private TextView createSchedual;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         readSchedual();
         View view = inflater.inflate(R.layout.fragment_schedual, container, false);
+        createSchedual = (TextView)view.findViewById(R.id.txt_create_goal);
         schedualRecyclerView = view.findViewById(R.id.schedual_recyclerview);
         schedualRecyclerView.setHasFixedSize(true);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
@@ -46,6 +53,14 @@ public class SchedualFragment extends Fragment {
         schedualRecyclerView.setLayoutManager(linearLayoutManager);
         adapter = new SchedualAdapter(getContext(), lstSchedual);
         schedualRecyclerView.setAdapter(adapter);
+        createSchedual.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent createSchedual = new Intent(getContext(), DateTimePicker.class);
+                startActivity(createSchedual);
+            }
+
+        });
         return view;
     }
     private void readSchedual(){

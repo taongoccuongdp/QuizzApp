@@ -53,6 +53,18 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
         });
+        if(getIntent().getExtras() != null){
+            String fragment = getIntent().getStringExtra("fragment switch");
+            if(fragment.equals("home")){
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new HomeFragment()).commit();
+            }else if(fragment.equals("search")){
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new SearchFragment()).commit();
+            }else if(fragment.equals("schedual")){
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new SchedualFragment()).commit();
+            }else if(fragment.equals("profile")){
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ProfileFragment()).commit();
+            }
+        }
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new HomeFragment()).commit();
     }
 }

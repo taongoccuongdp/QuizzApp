@@ -6,14 +6,13 @@ public class Schedual {
     public Schedual(){
 
     }
-    public Schedual(String date, String note, String status) {
+    public Schedual(String date, String note) {
         this.date = date;
         this.note = note;
     }
     public String getDate() {
         return date;
     }
-
     public void setDate(String date) {
         this.date = date;
     }

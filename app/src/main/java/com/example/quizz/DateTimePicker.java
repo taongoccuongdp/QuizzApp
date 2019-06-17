@@ -2,6 +2,7 @@ package com.example.quizz;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.support.annotation.NonNull;
@@ -66,7 +67,18 @@ public class DateTimePicker extends AppCompatActivity implements DatePickerDialo
                     Toast.makeText(DateTimePicker.this, "Vui lòng chọn thời gian", Toast.LENGTH_SHORT);
                 }else{
                     addToFirebase();
+                    Intent schedualIntent = new Intent(DateTimePicker.this, MainActivity.class);
+                    schedualIntent.putExtra("fragment switch", "schedual");
+                    startActivity(schedualIntent);
                 }
+            }
+        });
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent schedualIntent = new Intent(DateTimePicker.this, MainActivity.class);
+                schedualIntent.putExtra("fragment switch", "schedual");
+                startActivity(schedualIntent);
             }
         });
     }
@@ -92,6 +104,10 @@ public class DateTimePicker extends AppCompatActivity implements DatePickerDialo
     }
     private void addToFirebase(){
         String userUID = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("scheduals").child(userUID);
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("schedules").child(userUID).child(this.date);
+        HashMap<String, Object> hashMap = new HashMap<>();
+        hashMap.put("date", this.date);
+        hashMap.put("note", note.getText().toString());
+        ref.setValue(hashMap);
     }
 }

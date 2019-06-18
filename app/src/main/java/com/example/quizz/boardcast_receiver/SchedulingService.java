@@ -11,6 +11,7 @@ import android.net.Uri;
 import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.v4.app.NotificationCompat;
+import android.util.Log;
 
 import com.example.quizz.ExtendFunc;
 import com.example.quizz.HomeActivity;
@@ -30,10 +31,21 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-public class SchedulingService extends BroadcastReceiver {
+public class SchedulingService extends IntentService {
     private static final int TIME_VIBRATE = 1000;
+
+    /**
+     * Creates an IntentService.  Invoked by your subclass's constructor.
+     *
+     * @param name Used to name the worker thread, important only for debugging.
+     */
+    public SchedulingService(String name) {
+        super(name);
+    }
+
     @Override
-    public void onReceive(final Context context, Intent intent) {
+    protected void onHandleIntent(Intent intent) {
+        Log.d("Notification", "Runned");
         Date c= Calendar.getInstance().getTime();
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
         String[] date = sdf.format(c).split("-");
@@ -47,21 +59,20 @@ public class SchedulingService extends BroadcastReceiver {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if(dataSnapshot.exists()){
                     Schedual schedual = dataSnapshot.getValue(Schedual.class);
-                    NotificationManager notificationManager = (NotificationManager)context.getSystemService(Context.NOTIFICATION_SERVICE);
-                    Intent notificationIntent = new Intent(context, HomeActivity.class);
+                    NotificationManager notificationManager = (NotificationManager)SchedulingService.this.getSystemService(Context.NOTIFICATION_SERVICE);
+                    Intent notificationIntent = new Intent(SchedulingService.this, MainActivity.class);
                     notificationIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    PendingIntent pendingIntent= PendingIntent.getActivity(context, 0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+                    PendingIntent pendingIntent= PendingIntent.getActivity(SchedulingService.this, 0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
                     Uri sound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-                    NotificationCompat.Builder builder = new NotificationCompat.Builder(context)
+                    NotificationCompat.Builder builder = new NotificationCompat.Builder(SchedulingService.this)
                             .setSmallIcon(R.mipmap.ic_launcher_round)
                             .setContentTitle("Ptit Quizz")
                             .setContentText("Nhiệm vụ hôm nay: "+schedual.getNote())
                             .setSound(sound)
                             .setVibrate(new long[]{TIME_VIBRATE, TIME_VIBRATE, TIME_VIBRATE, TIME_VIBRATE, TIME_VIBRATE})
-                            .setWhen(System.currentTimeMillis())
                             .setContentIntent(pendingIntent)
                             .setAutoCancel(true);
-                    notificationManager.notify(0, builder.build());
+                    notificationManager.notify(1, builder.build());
                 }
             }
 

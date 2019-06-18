@@ -3,4 +3,6 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="channel_name">quizz_channel</string>
+    <string name="channel_description">quizz_channel_description</string>
 </resources>

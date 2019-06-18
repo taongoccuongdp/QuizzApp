@@ -1,6 +1,7 @@
 package com.example.quizz.boardcast_receiver;
 
 import android.app.IntentService;
+import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
@@ -8,9 +9,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.media.RingtoneManager;
 import android.net.Uri;
+import android.os.Build;
 import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.NotificationManagerCompat;
 import android.util.Log;
 
 import com.example.quizz.ExtendFunc;
@@ -59,20 +62,21 @@ public class SchedulingService extends IntentService {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if(dataSnapshot.exists()){
                     Schedual schedual = dataSnapshot.getValue(Schedual.class);
-                    NotificationManager notificationManager = (NotificationManager)SchedulingService.this.getSystemService(Context.NOTIFICATION_SERVICE);
-                    Intent notificationIntent = new Intent(SchedulingService.this, MainActivity.class);
-                    notificationIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    PendingIntent pendingIntent= PendingIntent.getActivity(SchedulingService.this, 0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+                    NotificationManagerCompat notificationManager = NotificationManagerCompat.from(getApplicationContext());
+                    Intent notificationIntent = new Intent(getApplicationContext(), MainActivity.class);
+                    notificationIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+                    PendingIntent pendingIntent= PendingIntent.getActivity(getApplicationContext(), 0, notificationIntent, 0);
                     Uri sound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-                    NotificationCompat.Builder builder = new NotificationCompat.Builder(SchedulingService.this)
+                    NotificationCompat.Builder builder = new NotificationCompat.Builder(getApplicationContext(), "quizz_channel")
                             .setSmallIcon(R.mipmap.ic_launcher_round)
                             .setContentTitle("Ptit Quizz")
                             .setContentText("Nhiệm vụ hôm nay: "+schedual.getNote())
                             .setSound(sound)
+                            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
                             .setVibrate(new long[]{TIME_VIBRATE, TIME_VIBRATE, TIME_VIBRATE, TIME_VIBRATE, TIME_VIBRATE})
                             .setContentIntent(pendingIntent)
                             .setAutoCancel(true);
-                    notificationManager.notify(1, builder.build());
+                    notificationManager.notify(001, builder.build());
                 }
             }
 
@@ -82,4 +86,5 @@ public class SchedulingService extends IntentService {
             }
         });
     }
+
 }

@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -32,6 +33,7 @@ public class QuizzActivity extends AppCompatActivity {
     private TextView textAnswer;
     private TextView questionCounter;
     private String rightOpt;
+    private Button exit;
     private int timeToQuizz;
     CountDownTimer countDownTimer;
 
@@ -47,6 +49,14 @@ public class QuizzActivity extends AppCompatActivity {
         timeToQuizz = 0;
         //Show first question
         showQuestion();
+        exit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(QuizzActivity.this, EndActivity.class);
+                intent.putExtra("totalquizztime", timeToQuizz);
+                startActivity(intent);
+            }
+        });
         //set event
         option1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -101,7 +111,7 @@ public class QuizzActivity extends AppCompatActivity {
             }, 2000);
         } else {
             imgAnswer.setImageResource(R.drawable.wrong_answer);
-            textAnswer.setText("Sai rồi!!");
+            textAnswer.setText("Sai rồi!! Là đáp án thứ " + rightOpt.charAt(6));
 
             imgAnswer.setVisibility(View.VISIBLE);
             textAnswer.setVisibility(View.VISIBLE);
@@ -128,6 +138,7 @@ public class QuizzActivity extends AppCompatActivity {
         option2 = (TextView) findViewById(R.id.txt_option2);
         option3 = (TextView) findViewById(R.id.txt_option3);
         option4 = (TextView) findViewById(R.id.txt_option4);
+        exit = (Button) findViewById(R.id.btn_exit);
         //txtCountdown = (TextView)findViewById(R.id.txt_timeCountDown);
         questionCounter = (TextView) findViewById(R.id.txt_questions);
         textAnswer = (TextView) findViewById(R.id.txt_answer);

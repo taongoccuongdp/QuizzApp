@@ -61,6 +61,7 @@ public class SchedualFragment extends Fragment {
             }
 
         });
+
         return view;
     }
     private void readSchedual(){

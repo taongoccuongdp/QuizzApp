@@ -23,8 +23,8 @@ public class AlarmReceiver {
         Intent intent = new Intent(context, SchedulingService.class);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
         Calendar c= Calendar.getInstance();
-        c.add(Calendar.HOUR, 20);
-        c.add(Calendar.MINUTE, 29);
+        c.add(Calendar.HOUR, 23);
+        c.add(Calendar.MINUTE, 8);
         c.add(Calendar.SECOND, 0);
         alarmManager.setExact(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(), pendingIntent);
     }

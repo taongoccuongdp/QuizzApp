@@ -47,16 +47,6 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/bg_list_subject_item"
                 android:text="Trắc nghiệm"/>
-            <Button
-                android:id="@+id/btn_schedual"
-                android:drawablePadding="20dp"
-                android:textAlignment="textStart"
-                android:padding="20dp"
-                android:drawableLeft="@drawable/ic_schedule_black_24dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/bg_list_subject_item"
-                android:text="Đặt lịch"/>
         </LinearLayout>
     <ImageView
         android:id="@+id/img_subject_icon"

@@ -34,7 +34,7 @@ public class SchedualAdapter extends RecyclerView.Adapter<SchedualAdapter.Schedu
 
     @Override
     public void onBindViewHolder(@NonNull SchedualViewHolder schedualViewHolder, int i) {
-        schedualViewHolder.date.setText(mData.get(i).getDate());
+        schedualViewHolder.date.setText(mData.get(i).getDate().replace("-", "/"));
         schedualViewHolder.note.setText(mData.get(i).getNote());
     }
 

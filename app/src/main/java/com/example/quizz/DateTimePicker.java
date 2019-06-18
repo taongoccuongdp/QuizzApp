@@ -16,7 +16,9 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.example.quizz.model.Schedual;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -24,10 +26,12 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.text.DateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.List;
 
-public class DateTimePicker extends AppCompatActivity implements DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener {
+public class DateTimePicker extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
     private EditText note;
     private EditText time;
     private Button add;
@@ -35,8 +39,6 @@ public class DateTimePicker extends AppCompatActivity implements DatePickerDialo
     private int year;
     private int month;
     private int dayOfMonth;
-    private int hour;
-    private int minute;
     private String date;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,10 +68,7 @@ public class DateTimePicker extends AppCompatActivity implements DatePickerDialo
                 }else if(time.getText().equals("")){
                     Toast.makeText(DateTimePicker.this, "Vui lòng chọn thời gian", Toast.LENGTH_SHORT);
                 }else{
-                    addToFirebase();
-                    Intent schedualIntent = new Intent(DateTimePicker.this, MainActivity.class);
-                    schedualIntent.putExtra("fragment switch", "schedual");
-                    startActivity(schedualIntent);
+                    checkTime();
                 }
             }
         });
@@ -88,18 +87,7 @@ public class DateTimePicker extends AppCompatActivity implements DatePickerDialo
         this.year = year;
         this.month = month;
         this.dayOfMonth = dayOfMonth;
-        int hour, minute;
-        Calendar c = Calendar.getInstance();
-        hour = c.get(Calendar.HOUR);
-        minute = c.get(Calendar.MINUTE);
-        TimePickerDialog tpd = new TimePickerDialog(DateTimePicker.this, DateTimePicker.this, hour, minute, true);
-        tpd.show();
-    }
-    @Override
-    public void onTimeSet(TimePicker view, int hour, int minute) {
-        this.hour = hour;
-        this.minute = minute;
-        this.date = ExtendFunc.DateToString(this.year, this.month, this.dayOfMonth, this.hour, this.minute);
+        this.date = new StringBuilder().append(dayOfMonth).append("-").append(month).append("-").append(year).toString();
         time.setText(this.date);
     }
     private void addToFirebase(){
@@ -110,4 +98,40 @@ public class DateTimePicker extends AppCompatActivity implements DatePickerDialo
         hashMap.put("note", note.getText().toString());
         ref.setValue(hashMap);
     }
+    private void checkTime(){
+        DatabaseReference ref;
+        final String d = this.date;
+        final List<Schedual> lstSchedual = new ArrayList<>();
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        ref = FirebaseDatabase.getInstance().getReference("schedules").child(user.getUid());
+        ref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                lstSchedual.clear();
+                boolean add = true;
+                for(DataSnapshot snapshot:dataSnapshot.getChildren()){
+                    Schedual schedual = snapshot.getValue(Schedual.class);
+                    if(schedual.getDate().equals(d)){
+                        add = false;
+                }
+            }
+                if (add == false) Toast.makeText(DateTimePicker.this,"Thời gian bị trùng",Toast.LENGTH_SHORT).show();
+                if(add == true){
+                    addToFirebase();
+                    Intent schedualIntent = new Intent(DateTimePicker.this, MainActivity.class);
+                    schedualIntent.putExtra("fragment switch", "schedual");
+                    startActivity(schedualIntent);
+                    Toast.makeText(DateTimePicker.this,"Thêm thành công",Toast.LENGTH_SHORT).show();
+                }
+
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
 }

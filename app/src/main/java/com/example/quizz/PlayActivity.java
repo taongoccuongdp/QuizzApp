@@ -58,6 +58,7 @@ public class PlayActivity extends AppCompatActivity {
                 .append((int)QuizzSession.QUIZZ_TIME/60).append(" phút ")
                 .append(QuizzSession.QUIZZ_TIME%60)
                 .append(" giây").toString());
+        QuizzSession.NUM_OF_QUESTIONS = lstQuestion.size();
         //Log.d("Question1:", lstQuestion.get(1).getSubjectId());
         numOfQuestions.setText(String.format("Số lượng câu hỏi: %d", QuizzSession.NUM_OF_QUESTIONS));
         if(QuizzSession.QUIZZ_TIME == QuizzSession.DONT_SET_TIME){

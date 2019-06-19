@@ -70,6 +70,19 @@ public class SchedualAdapter extends RecyclerView.Adapter<SchedualAdapter.Schedu
                 });
             }
         });
+        holder.delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                DatabaseReference ref = FirebaseDatabase.getInstance().getReference("schedules").child(uid).child(mData.get(holder.getAdapterPosition()).getDate());
+                ref.removeValue(new DatabaseReference.CompletionListener() {
+                    @Override
+                    public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
+                        Toast.makeText(mContex, "Xóa thành công", Toast.LENGTH_SHORT);
+                    }
+                });
+            }
+        });
         return holder;
     }
 
@@ -77,15 +90,6 @@ public class SchedualAdapter extends RecyclerView.Adapter<SchedualAdapter.Schedu
     public void onBindViewHolder(@NonNull final SchedualViewHolder schedualViewHolder, int i) {
         schedualViewHolder.date.setText(mData.get(i).getDate().replace("-", "/"));
         schedualViewHolder.note.setText(mData.get(i).getNote());
-        schedualViewHolder.delete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
-                DatabaseReference ref = FirebaseDatabase.getInstance().getReference("schedules").child(uid).child(schedualViewHolder.date.getText()
-                        .toString().replace("/", "-"));
-                ref.removeValue();
-            }
-        });
     }
 
     @Override

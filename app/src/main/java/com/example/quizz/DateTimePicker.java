@@ -104,28 +104,20 @@ public class DateTimePicker extends AppCompatActivity implements DatePickerDialo
         final String d = this.date;
         final List<Schedual> lstSchedual = new ArrayList<>();
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        ref = FirebaseDatabase.getInstance().getReference("schedules").child(user.getUid());
-        ref.addValueEventListener(new ValueEventListener() {
+        ref = FirebaseDatabase.getInstance().getReference("schedules").child(user.getUid()).child(d);
+        ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                lstSchedual.clear();
-                boolean add = true;
-                for(DataSnapshot snapshot:dataSnapshot.getChildren()){
-                    Schedual schedual = snapshot.getValue(Schedual.class);
-                    if(schedual.getDate().equals(d)){
-                        add = false;
-                }
-            }
-                if (add == false) Toast.makeText(DateTimePicker.this,"Thời gian bị trùng",Toast.LENGTH_SHORT).show();
-                if(add == true){
+                if(dataSnapshot.exists()){
+                    Toast.makeText(DateTimePicker.this,"Thời gian bị trùng",Toast.LENGTH_SHORT).show();
+                }else {
                     addToFirebase();
+                    Toast.makeText(DateTimePicker.this,"Thêm thành công",Toast.LENGTH_SHORT).show();
                     Intent schedualIntent = new Intent(DateTimePicker.this, MainActivity.class);
                     schedualIntent.putExtra("fragment switch", "schedual");
                     startActivity(schedualIntent);
-                    Toast.makeText(DateTimePicker.this,"Thêm thành công",Toast.LENGTH_SHORT).show();
+                    finish();
                 }
-
-
             }
 
             @Override

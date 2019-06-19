@@ -84,8 +84,9 @@ public class DateTimePicker extends AppCompatActivity implements DatePickerDialo
 
     @Override
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+        month = month + 1;
         this.year = year;
-        this.month = month+1;
+        this.month = month;
         this.dayOfMonth = dayOfMonth;
         this.date = new StringBuilder().append(dayOfMonth).append("-").append(month).append("-").append(year).toString();
         time.setText(this.date);

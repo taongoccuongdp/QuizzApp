@@ -12,11 +12,11 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="45dp"
         android:fontFamily="@font/billabong"
         android:text="Đăng ký"
         android:textColor="@android:color/white"
-        android:textSize="32sp" />
+        android:textSize="30sp" />
     <EditText
         android:id="@+id/txtRegister_Email"
         android:layout_width="300dp"

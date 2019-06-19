@@ -12,8 +12,8 @@ public class QuizzSession {
     public static int SCORE = 0;
     public static int QUIZZ_TIME = 0;
     public static final int DONT_SET_TIME = 7200;
-    public static final int TEST_TIME = 600; //Tính theo giây
-    public static final int NUM_QUESTIONS_FOR_TEST = 3;
+    public static final int TEST_TIME = 1800; //Tính theo giây
+    public static final int NUM_QUESTIONS_FOR_TEST = 30;
     public static final int ALL_QUESTIONS = 0;
     public static String QUIZZ_CATEGORY = "";
     public static final String QUIZZ = "Quiz";

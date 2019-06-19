@@ -85,7 +85,9 @@ public class Uploadphoto extends AppCompatActivity {
                         txtUpload.setVisibility(View.INVISIBLE);
                         imgUpload.setVisibility(View.INVISIBLE);
                         Intent profileIntent = new Intent(Uploadphoto.this, MainActivity.class);
+                        profileIntent.putExtra("fragment switch", "profile");
                         startActivity(profileIntent);
+                        finish();
                     }else{
                         Toast.makeText(Uploadphoto.this, "Failed", Toast.LENGTH_SHORT).show();
                     }

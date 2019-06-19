@@ -43,7 +43,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/txt_answer"
-        android:layout_marginTop="35dp"
+        android:layout_marginTop="25dp"
         android:orientation="vertical"
         android:background="@drawable/bg_quizz"
         android:padding="12dp">
@@ -56,7 +56,7 @@
             android:text="Câu hỏi 1: fsàdgfdbghtrgtrvfdfdffdgrgregdffsdfsdfsdfẻtretggregregrg"
             />
         <View
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="3dp"
             android:layout_width="match_parent"
             android:layout_height="2dp"
             android:background="@color/timelineDarkGrey"
@@ -70,7 +70,8 @@
             android:paddingBottom="5dp"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
-            android:layout_marginTop="20dp"
+            android:textSize="10sp"
+            android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Đây là option 1"/>'
@@ -81,9 +82,10 @@
             android:textAlignment="center"
             android:paddingTop="5dp"
             android:paddingBottom="5dp"
+            android:textSize="10sp"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Đây là option 2"/>
@@ -95,9 +97,10 @@
             android:textAlignment="center"
             android:paddingTop="5dp"
             android:paddingBottom="5dp"
+            android:textSize="10sp"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Đây là option 3"/>
@@ -109,7 +112,8 @@
             android:paddingTop="5dp"
             android:paddingBottom="5dp"
             android:layout_marginLeft="5dp"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="10dp"
+            android:textSize="10sp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Đây là option 4"/>
@@ -117,8 +121,8 @@
 
     <me.itangqi.waveloadingview.WaveLoadingView
         android:id="@+id/pb_timeCountDown"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         android:layout_marginBottom="20dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"

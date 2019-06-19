@@ -34,7 +34,8 @@ public class RankingAdapter extends RecyclerView.Adapter<RankingAdapter.RankingV
     @Override
     public void onBindViewHolder(@NonNull RankingViewHolder rankingViewHolder, int i) {
         rankingViewHolder.subject.setText("Môn học: "+mData.get(i).getSubjectName());
-        rankingViewHolder.score.setText("Điểm số:" + mData.get(i).getScore());
+        rankingViewHolder.score.setText("Điểm cao:" + mData.get(i).getScore());
+        rankingViewHolder.numOfTest.setText("Lần làm bài: " + mData.get(i).getNumOfTest());
     }
 
     @Override
@@ -46,13 +47,13 @@ public class RankingAdapter extends RecyclerView.Adapter<RankingAdapter.RankingV
         private LinearLayout ranking_item;
         private TextView subject;
         private TextView score;
-        private TextView timeOfQuiz;
+        private TextView numOfTest;
         public RankingViewHolder(View itemView){
             super(itemView);
             ranking_item = (LinearLayout)itemView.findViewById(R.id.ranking_item_id);
             subject = (TextView)itemView.findViewById(R.id.txt_subject_name);
             score = (TextView)itemView.findViewById(R.id.txt_score);
-            timeOfQuiz = (TextView)itemView.findViewById(R.id.txt_time_quizz);
+            numOfTest = (TextView)itemView.findViewById(R.id.txt_numOfTest);
         }
     }
 }

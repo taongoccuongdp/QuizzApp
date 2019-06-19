@@ -1,6 +1,8 @@
 package com.example.quizz;
 
 import android.content.Intent;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -9,9 +11,13 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.quizz.model.QuizzSession;
+import com.example.quizz.model.Rank;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.HashMap;
 
@@ -35,13 +41,33 @@ public class EndActivity extends AppCompatActivity {
         subjectId.setText(new StringBuilder().append("Mã môn học: ").append(QuizzSession.SUBJECT_ID).toString());
         numOfRightAnswer.setText(String.format("Điểm số: %d / %d", QuizzSession.SCORE*10/QuizzSession.NUM_OF_QUESTIONS, 10));
         if(QuizzSession.QUIZZ_CATEGORY.equals(QuizzSession.TEST)){
-            String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+            final String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
             DatabaseReference ref = FirebaseDatabase.getInstance().getReference("scores").child(uid).child(QuizzSession.SUBJECT_ID);
-            HashMap<String, Object> hashMap = new HashMap<>();
-            hashMap.put("subjectName", QuizzSession.SUBJECT_NAME);
-            hashMap.put("subjectId", QuizzSession.SUBJECT_ID);
-            hashMap.put("score", QuizzSession.SCORE*10/QuizzSession.NUM_OF_QUESTIONS);
-            ref.setValue(hashMap);
+            final HashMap<String, Object> hashMap = new HashMap<>();
+            ref.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    Rank currentRank = dataSnapshot.getValue(Rank.class);
+                    if(currentRank != null){
+                        if(currentRank.getScore() < QuizzSession.SCORE*10/QuizzSession.NUM_OF_QUESTIONS){
+                            hashMap.put("score", QuizzSession.SCORE*10/QuizzSession.NUM_OF_QUESTIONS);
+                        }
+                        hashMap.put("numOfTest", currentRank.getNumOfTest() + 1);
+                        FirebaseDatabase.getInstance().getReference("scores").child(uid).child(QuizzSession.SUBJECT_ID).updateChildren(hashMap);
+                    }else {
+                        hashMap.put("score", QuizzSession.SCORE*10/QuizzSession.NUM_OF_QUESTIONS);
+                        hashMap.put("subjectName", QuizzSession.SUBJECT_NAME);
+                        hashMap.put("subjectId", QuizzSession.SUBJECT_ID);
+                        hashMap.put("numOfTest", 1);
+                        FirebaseDatabase.getInstance().getReference("scores").child(uid).child(QuizzSession.SUBJECT_ID).setValue(hashMap);
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
         }
         endGame.setOnClickListener(new View.OnClickListener() {
             @Override

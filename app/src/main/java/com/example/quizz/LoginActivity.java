@@ -42,10 +42,6 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        /*if (auth.getCurrentUser() != null){
-            startActivity(new Intent(LoginActivity.this, HomeActivity.class));
-            finish();
-        }*/
         edtemail = (EditText)findViewById(R.id.txtLogin_Email);
         edtpassword = (EditText)findViewById(R.id.txtLogin_Password);
         login = (Button)findViewById(R.id.btnLogin_Login);
@@ -56,6 +52,10 @@ public class LoginActivity extends AppCompatActivity {
         checkRemember();
         //Get firebase auth instance
         auth = FirebaseAuth.getInstance();
+        if (auth.getCurrentUser() != null){
+            startActivity(new Intent(LoginActivity.this, MainActivity.class));
+            finish();
+        }
         remememberMe.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

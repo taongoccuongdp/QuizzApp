@@ -34,21 +34,26 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-public class SchedulingService extends IntentService {
+public class SchedulingService extends BroadcastReceiver {
     private static final int TIME_VIBRATE = 1000;
 
-    /**
-     * Creates an IntentService.  Invoked by your subclass's constructor.
-     *
-     * @param name Used to name the worker thread, important only for debugging.
-     */
-    public SchedulingService(String name) {
-        super(name);
-    }
-
     @Override
-    protected void onHandleIntent(Intent intent) {
-        Log.d("Notification", "Runned");
+    public void onReceive(final Context context, Intent intent) {
+        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);
+        Intent notificationIntent = new Intent(context, MainActivity.class);
+        notificationIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+        PendingIntent pendingIntent= PendingIntent.getActivity(context, 0, notificationIntent, 0);
+        Uri sound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(context, "quizz_channel")
+                .setSmallIcon(R.mipmap.ic_launcher_round)
+                .setContentTitle("Ptit Quizz")
+                .setContentText("Nhiệm vụ hôm nay: ")
+                .setSound(sound)
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                .setVibrate(new long[]{TIME_VIBRATE, TIME_VIBRATE, TIME_VIBRATE, TIME_VIBRATE, TIME_VIBRATE})
+                .setContentIntent(pendingIntent)
+                .setAutoCancel(true);
+        notificationManager.notify(001, builder.build());
         Date c= Calendar.getInstance().getTime();
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
         String[] date = sdf.format(c).split("-");
@@ -62,13 +67,13 @@ public class SchedulingService extends IntentService {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if(dataSnapshot.exists()){
                     Schedual schedual = dataSnapshot.getValue(Schedual.class);
-                    NotificationManagerCompat notificationManager = NotificationManagerCompat.from(getApplicationContext());
-                    Intent notificationIntent = new Intent(getApplicationContext(), MainActivity.class);
+                    NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);
+                    Intent notificationIntent = new Intent(context, MainActivity.class);
                     notificationIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
-                    PendingIntent pendingIntent= PendingIntent.getActivity(getApplicationContext(), 0, notificationIntent, 0);
+                    PendingIntent pendingIntent= PendingIntent.getActivity(context, 0, notificationIntent, 0);
                     Uri sound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-                    NotificationCompat.Builder builder = new NotificationCompat.Builder(getApplicationContext(), "quizz_channel")
-                            .setSmallIcon(R.mipmap.ic_launcher_round)
+                    NotificationCompat.Builder builder = new NotificationCompat.Builder(context, "quizz_channel")
+                            .setSmallIcon(R.drawable.icon)
                             .setContentTitle("Ptit Quizz")
                             .setContentText("Nhiệm vụ hôm nay: "+schedual.getNote())
                             .setSound(sound)
@@ -81,10 +86,10 @@ public class SchedulingService extends IntentService {
             }
 
             @Override
+
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
         });
     }
-
 }
